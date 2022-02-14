@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Game.Scripts.Playable
+namespace Game.Playable.Scripts.PreScripts
 {
     public class CtaController : MonoBehaviour
     {
@@ -36,11 +36,6 @@ namespace Game.Scripts.Playable
         public void OpenStore()
         {
             Luna.Unity.Playable.InstallFullGame();
-        }
-
-        public void SpeedButtonClicked()
-        {
-            Luna.Unity.Analytics.LogEvent("SpeedButtonClicked", 0);
         }
 
         public static void OpenStoreStatic()
