@@ -18,7 +18,7 @@ using UnityEngine.Events;
 
 
 // PUBLISHER SCRIPT
-public class TestingEvents : MonoBehaviour
+public class TestingEventsPublisher : MonoBehaviour
 {
     // Version 1
     // public event EventHandler OnSpacePressed; // Event's format generally start with On.    
