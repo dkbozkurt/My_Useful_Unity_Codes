@@ -31,7 +31,7 @@ public enum MovementType
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-public class MovingObject : MonoBehaviour
+public class FiveMainWaysToMove : MonoBehaviour
 {
     [Header("General Settings")] 
     public KeyCode MoveTriggerKeyCode= KeyCode.Space;
