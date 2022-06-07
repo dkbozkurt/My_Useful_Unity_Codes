@@ -13,6 +13,9 @@ using UnityEngine;
 /// Abstract class object can be used with SerializeField and public means can assignable from inspector.
 ///
 /// "FindObjectsOfTypes"
+///
+/// Note: An abstract class just means that you can't implement or instantiate an instance of that class
+/// so the class could never be added on to a component or created with a new character call.
 /// 
 /// Ref : https://www.youtube.com/watch?v=xI4QWXS6vAU
 /// </summary>
