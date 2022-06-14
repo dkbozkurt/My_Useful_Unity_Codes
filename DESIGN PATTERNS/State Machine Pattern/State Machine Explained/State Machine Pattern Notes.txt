@@ -1,0 +1,47 @@
+How to Program in Unity: State Machines Explained
+
+Ref : https://www.youtube.com/watch?v=Vt8aZDPzRjI&ab_channel=iHeartGameDev
+
+ - STATE? -
+	The current condiyion of an object or system. Such as characters: jumping, moving,healthy, happy,sad, etc.
+ - WHAT STATE DOES? - 
+	Decides the behaviour of the object or system
+	
+ - STATE PATTERN? -	
+
+	Is when we use the concepts of state within code;
+	- Each state's code is self-contained
+	- allows us to modify the behaviour independently
+	- changes to one state will not impact other states
+	
+Note: PSEUDOCDE is describing a program or algorithm using easy-to-undestand "spoken" language.
+
+ - FINITE STATE MACHINE? -
+ 
+	- "Finite" meaning there are a limited number of states.
+	- Only limited to the number of states we program
+	- Can be in one state at a time
+	- State designates object behaviour
+	- Contains transitions between states
+	
+ - TO CREATE STATE MACHINE - 
+ 
+	- Define each state of the machine
+	- Define the transitions between states
+	- Select the initial state
+
+ - STATE MACHINE IMPLEMENTATION EXPLANATION -
+ 
+	- CONTEXT: is what creates and manages the instances of concrete states used when the game is running.
+	Passes relevant data about our object or system to the currently active state. Typically handled in a 
+	monobehaviour script.
+	
+	- ABSTRACT STATE: Essentially a blueprint or to use a programming term prototype of what all concrete 
+	states should drive from(Means we cannot create an instance of this class rather it is mre of a base
+	to bouild off of for the concrete states). The abstract states define methods that all concrete states
+	are intended to have and we use it as the type definition for the current state handled in the context.
+	
+	- CONCRETE STATES: Self-contained with their own specific behaviour. Define own properties and method
+	but are required to have the abstract state's properties and methods as well. 
+	
+	[CONTEXT will instantiate each CONCRETE state so CONCRETE states can have instances.]
