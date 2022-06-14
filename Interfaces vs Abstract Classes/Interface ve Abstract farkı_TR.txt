@@ -1,0 +1,32 @@
+ - Interface ve Abstract farkı -
+ 
+	Interfaceler sadece referans typetır, sadece referans tutarlar bir class değillerdir 
+ve operasyonların imzasını tutarlar(yarım operasyon(sadece imzası)), tamamlanmış operasyon içermezler.
+
+Classlar'da referans tiptir ama tamamen bir somut yapıya sahiptir, tamamlanmış operasyonlardan
+oluşurlar.
+
+Abstract sınıflar, hem tamamlanmış hem tamamlanmamış operasyon içerebilen classlardir.
+ 
+ 
+#INTERFACE
+
+	Interface nedir? : Yazılımsal olarak class'lara arayüz görevi görür, 
+ve class'ların o operasyonları imzalamasını zorunlu hale getirir.
+Sürdürülebilir yazılım en büyük üyelerinden bir tanesidir.
+
+Yazılım biraz daha günden güne değişkenlik gösterebilecek bir şeydir.
+Bu nedenle sürekli değişen bu ihtiyaçlara karşı, interfaceler ile 
+yazılımda değişim sürecini rahatlıkla yürütebiliriz.
+
+
+#ABSTRACT
+
+	Sınıf yapısına sahiptir. Ortak veya ortak olmayan operasyonlar içerebilir. Ortak olmayan
+operasyonlar imza şeklindedir. Abstract class'ı inherit eden sınıflar bu imzayi kendi içlerinde
+uygulamak zorundadır. Ortak operasyonları ortak kullanabilir. 
+
+!!! Abstract class ile normal class'ın farkı abstract classlar newlenemez(instantiate edilemez).
+!!! Contruction blockları instantiate esnasında çalıştır fakat abstract class'lar inherit edildiği 
+zaman için inherit eden class, abstract class'ın constructorunu çalıştırır. Abstract class'ın 
+constructoru protected olması gerekir.
