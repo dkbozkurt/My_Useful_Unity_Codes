@@ -1,0 +1,43 @@
+How to Program in Unity: Command Pattern Explained
+
+Ref : https://www.youtube.com/watch?v=oLRINAn0cuw
+
+
+ - How can we delay logic from being executed for an unknown amount of time?
+	- By using the command pattern.
+		
+ - COMMAND PATTERN? -	
+ 
+	- Encapsulates a method & any data that it may require inside of a storable object.
+so that it can be executed at a later time.
+
+	- Commands are classes that wrap the method/logic we want performed at a later time.
+	
+	- So basically we can create an instance of a class then call its method whenevet we want.
+ 
+ - THE STRUCTURE OF THE COMMAND PATTERN -
+ 
+	- ABSTRACT COMMAND/ INTERFACE: We can define abstract execute method that means all derive child classes can and must 
+	define the execute method's functionally. Or we can use interfaces for this case too.
+	
+	- CONCRETE COMMAND: All concrete commands should have an "execute" method. (Means derive from abstract command)
+	
+	- INVOKER: Calls "execute" on the stored commands. We can customize the invoker's implementation to fit the system
+	of our games.
+	
+	- RECEIVER:
+	
+	- CLIENT: The class that creates different type of commands and send its so invoker. Multiple clients can send commands 
+	to single invoker.
+	
+	*** With command pattern, the client creates an instance of a concrete command, the invover will store 
+	the instance and then later, the invoker will execute the command on or using the receiver. And the
+	invoker has the guarantee that every command can be executed because all commands intherit the ability
+	to be executed from the abstract class.
+	
+	Meta example:
+	
+	A youtuber tell "command" us to like his video on youtube. Youtuber will be the "client", created a "command" 
+	as, like this video. That was intended for our hand "receiver" which knows how to move the cursor and press
+	the like button. But youtuber gave the command to our brain "invoker" so that it stores the command instead,
+	and it knows how to store a command either immediate or later use.
