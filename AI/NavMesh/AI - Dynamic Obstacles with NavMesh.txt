@@ -1,0 +1,10 @@
+Unity NavMesh Tutorial - Making it Dynamic
+
+Ref : https://www.youtube.com/watch?v=FkLJ45Pt-mY&list=RDCMUCYbK_tjZ2OrIZFBvU6CCMiA&index=8
+
+Dynamic Obstacles:
+
+* To get dynamic obstacles for ai to avoid.
+	Set Carve property of "NavMeshObstacle" to true. 
+	And set "Carve Only Stationary" to false.(if its true, agent will try to avoid only static obstacles)
+	By that way agent will understand moving obstacles on the navmeshSurface and try to avid them.	
