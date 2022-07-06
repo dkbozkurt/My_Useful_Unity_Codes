@@ -30,9 +30,7 @@ public class Sound // MonoBehaviour removed
     public bool loop;
 
     public bool playOnAwake;
-    
-    
-    
+
     [HideInInspector] public AudioSource source;
 
 
