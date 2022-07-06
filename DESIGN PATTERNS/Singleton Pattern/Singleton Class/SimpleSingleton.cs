@@ -1,6 +1,7 @@
 // Dogukan Kaan Bozkurt
 //      github.com/dkbozkurt
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts;
@@ -20,24 +21,28 @@ namespace Game.Scripts.DesignPatterns
     // Toy Singleton
     public class SimpleSingleton : MonoBehaviour
     {
-        private static SimpleSingleton _instance = null;
+        private static SimpleSingleton instance = null;
 
         public static SimpleSingleton Instance
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = GameObject.FindObjectOfType<SimpleSingleton>();
-                    if(_instance == null)
-                        _instance = new GameObject("SimpleSingleton").AddComponent<SimpleSingleton>();
+                    instance = GameObject.FindObjectOfType<SimpleSingleton>();
+                    if(instance == null)
+                        instance = new GameObject("SimpleSingleton").AddComponent<SimpleSingleton>();
                 }
 
-                return _instance;
+                return instance;
             }
         
         }
 
+        private void OnEnable()
+        {
+            instance = this;
+        }
     }
 }
 
