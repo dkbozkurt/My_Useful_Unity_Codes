@@ -7,20 +7,21 @@ using UnityEngine;
 namespace ImportantSnackScripts.Scripts
 {
     /// <summary>
-    /// Ref & Out
+    /// Ref & In & Out
     /// 
     /// Ref : https://www.youtube.com/watch?v=LFo7OakOxEg
     /// </summary>
 
-    public class RefAndOut : MonoBehaviour
+    public class Ref_In_Out : MonoBehaviour
     {
     
         private int _intValue = 5;
 
         private void Start()
         {
-            //Ref();
-            Out();
+            // Ref();
+            // ut();
+            // In();
         }
 
         #region Ref
@@ -72,5 +73,22 @@ namespace ImportantSnackScripts.Scripts
 
         #endregion
         
+        #region In
+
+        // 'in' modifier make input read-only so we cant change the value;
+        private void In()
+        {
+            InValue(_intValue);
+        }
+
+        private void InValue(in int value)
+        {
+            // Gives an error
+            // value += 5;
+            
+            Debug.Log("Value didnt change with in modifier : "+ value);
+        }
+
+        #endregion
     }
 }
