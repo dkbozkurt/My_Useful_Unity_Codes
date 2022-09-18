@@ -4,14 +4,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _3DMovement
+namespace 3DMovement
 {
     /// <summary>
     /// Smooth Move Rotate and Float change operations by using Lerp
     /// 
     /// Ref : https://www.youtube.com/watch?v=jAN2IoWdPzM&ab_channel=CodeMonkey
     /// </summary>
-    public class SmoothMoveRotateFloatWithLerp : MonoBehaviour
+    public class SmoothMoveAndRotateFloatWithLerp : MonoBehaviour
     {
         [Header("Lerp Speed")]
         [SerializeField] private float lerpSpeed;
