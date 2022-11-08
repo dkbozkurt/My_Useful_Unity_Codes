@@ -152,7 +152,7 @@ namespace Grid_System.Generate_Generic_Grid_System
             return GetGridObject(x, y);
         }
         
-        private void GetXY(Vector3 worldPosition, out int x,out int y) // Or you could use Vector2Int to return 2 int values
+        public void GetXY(Vector3 worldPosition, out int x,out int y) // Or you could use Vector2Int to return 2 int values
         {
             x = Mathf.FloorToInt((worldPosition - _originPosition).x / _cellSize);
             y = Mathf.FloorToInt((worldPosition - _originPosition).y / _cellSize);
