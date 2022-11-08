@@ -15,7 +15,13 @@ namespace Grid_System.Generate_Generic_Grid_System
     /// </summary>
     public class Grid<TGridObject>
     {
-        public event EventHandler<Grid_HM.OnGridValueChangedEventArgs> OnGridObjectChanged; 
+        public event EventHandler<OnGridObjectChangedEventArgs> OnGridObjectChanged;
+
+        public class OnGridObjectChangedEventArgs : EventArgs
+        {
+            public int x;
+            public int y;
+        }
         #region Proporties
 
         private int _width, _height;
@@ -64,8 +70,7 @@ namespace Grid_System.Generate_Generic_Grid_System
             Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
             Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
 
-            OnGridObjectChanged += (object AssemblyDefinitionReferenceAsset,
-                Grid_HM.OnGridValueChangedEventArgs eventArgs) =>
+            OnGridObjectChanged += (object AssemblyDefinitionReferenceAsset, OnGridObjectChangedEventArgs eventArgs) =>
             {
                 _debugTextArray[eventArgs.x, eventArgs.y].text = _gridArray[eventArgs.x, eventArgs.y]?.ToString();
             };
@@ -113,7 +118,7 @@ namespace Grid_System.Generate_Generic_Grid_System
                 // For debug
                 _debugTextArray[x, y].text = _gridArray[x, y].ToString();
                 if (OnGridObjectChanged != null)
-                    OnGridObjectChanged(this, new Grid_HM.OnGridValueChangedEventArgs {x = x, y = y});
+                    OnGridObjectChanged(this, new OnGridObjectChangedEventArgs {x = x, y = y});
             }
         }
 
@@ -126,7 +131,7 @@ namespace Grid_System.Generate_Generic_Grid_System
 
         public void TriggerGridObjectChanged(int x,int y)
         {
-            if (OnGridObjectChanged != null) OnGridObjectChanged(this, new Grid_HM.OnGridValueChangedEventArgs { x =x,y =y});
+            if (OnGridObjectChanged != null) OnGridObjectChanged(this, new OnGridObjectChangedEventArgs { x =x,y =y});
         }
 
         public TGridObject GetGridObject(int x, int y)
