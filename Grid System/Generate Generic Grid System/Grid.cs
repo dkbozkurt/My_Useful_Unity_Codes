@@ -31,9 +31,6 @@ namespace Grid_System.Generate_Generic_Grid_System
         // Defining multi dimensional array
         private TGridObject[,] _gridArray;
 
-        // Only for Debug
-        private TextMesh[,] _debugTextArray;
-        
         #endregion
         
         // Constructor
@@ -45,8 +42,6 @@ namespace Grid_System.Generate_Generic_Grid_System
             _originPosition = originPosition;
             
             _gridArray = new TGridObject[width, height];
-            // Only for Debug
-            _debugTextArray = new TextMesh[width, height];
 
             for (int x = 0; x < _gridArray.GetLength(0); x++)
             {
@@ -56,26 +51,31 @@ namespace Grid_System.Generate_Generic_Grid_System
                 }
             }
 
-            for (int x = 0; x < _gridArray.GetLength(0); x++)
+            bool showDebug = true;
+            
+            // Only for Debug
+            if (showDebug)
             {
-                for (int y = 0; y < _gridArray.GetLength(1); y++)
+                TextMesh[,] debugTextArray = new TextMesh[width, height];
+                for (int x = 0; x < _gridArray.GetLength(0); x++)
                 {
-                    _debugTextArray[x, y] = CreateWorldText(_gridArray[x, y]?.ToString(), null,
-                        GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 30, Color.white, TextAnchor.MiddleCenter);
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
+                    for (int y = 0; y < _gridArray.GetLength(1); y++)
+                    {
+                        debugTextArray[x, y] = CreateWorldText(_gridArray[x, y]?.ToString(), null,
+                            GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 30, Color.white, TextAnchor.MiddleCenter);
+                        Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
+                        Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
+                    }
                 }
+
+                Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
+                Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
+
+                OnGridObjectChanged += (object sender, OnGridObjectChangedEventArgs eventArgs) =>
+                {
+                    debugTextArray[eventArgs.x, eventArgs.y].text = _gridArray[eventArgs.x, eventArgs.y]?.ToString();
+                };
             }
-
-            Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
-            Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
-
-            OnGridObjectChanged += (object AssemblyDefinitionReferenceAsset, OnGridObjectChangedEventArgs eventArgs) =>
-            {
-                _debugTextArray[eventArgs.x, eventArgs.y].text = _gridArray[eventArgs.x, eventArgs.y]?.ToString();
-            };
-
-            // SetValue(2, 1, 56);
         }
 
         #region Create World Text
@@ -116,7 +116,7 @@ namespace Grid_System.Generate_Generic_Grid_System
             {
                 _gridArray[x, y] = value;
                 // For debug
-                _debugTextArray[x, y].text = _gridArray[x, y].ToString();
+                // debugTextArray[x, y].text = _gridArray[x, y].ToString();
                 if (OnGridObjectChanged != null)
                     OnGridObjectChanged(this, new OnGridObjectChangedEventArgs {x = x, y = y});
             }
