@@ -15,7 +15,13 @@ namespace Grid_System.Generate_Grid_System
     /// </summary>
     public class Grid
     {
-        public event EventHandler<Grid_HM.OnGridValueChangedEventArgs> OnGridValueChanged; 
+        public event EventHandler<OnGridValueChangedEventArgs> OnGridValueChanged;
+        public class OnGridValueChangedEventArgs : EventArgs
+        {
+            public int x;
+            public int y;
+        }
+        
         #region Proporties
 
         private int _width, _height;
@@ -99,7 +105,7 @@ namespace Grid_System.Generate_Grid_System
                 _gridArray[x, y] = value;
                 _debugTextArray[x, y].text = _gridArray[x, y].ToString();
                 if (OnGridValueChanged != null)
-                    OnGridValueChanged(this, new Grid_HM.OnGridValueChangedEventArgs {x = x, y = y});
+                    OnGridValueChanged(this, new OnGridValueChangedEventArgs {x = x, y = y});
             }
         }
 
