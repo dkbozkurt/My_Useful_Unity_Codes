@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 namespace Grid_System.Generate_Grid_System
 {
     /// <summary>
+    /// Grid Test Class
+    /// 
     /// Ref : https://www.youtube.com/watch?v=waEsGu--9P8
     /// </summary>
     public class GenerateGrid : MonoBehaviour
@@ -22,6 +24,7 @@ namespace Grid_System.Generate_Grid_System
 
         private void Start()
         {
+            // Generate Grid
             _grid = new Grid(gridWidth, gridHeight, cellSize,gridOriginPosition);
         }
 

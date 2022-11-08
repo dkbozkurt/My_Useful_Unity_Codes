@@ -1,16 +1,21 @@
 // Dogukan Kaan Bozkurt
 //      github.com/dkbozkurt
 
+using System;
+using Grid_System.Heatmap;
 using TMPro;
 using UnityEngine;
 
 namespace Grid_System.Generate_Grid_System
 {
     /// <summary>
+    /// Grid Class
+    /// 
     /// Ref : https://www.youtube.com/watch?v=waEsGu--9P8
     /// </summary>
     public class Grid
     {
+        public event EventHandler<Grid_HM.OnGridValueChangedEventArgs> OnGridValueChanged; 
         #region Proporties
 
         private int _width, _height;
@@ -43,7 +48,7 @@ namespace Grid_System.Generate_Grid_System
                 for (int y = 0; y < _gridArray.GetLength(1); y++)
                 {
                     _debugTextArray[x, y] = CreateWorldText(_gridArray[x, y].ToString(), null,
-                        GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 30, Color.white);
+                        GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 30, Color.white, TextAnchor.MiddleCenter);
                     Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
                     Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
                 }
@@ -93,6 +98,8 @@ namespace Grid_System.Generate_Grid_System
             {
                 _gridArray[x, y] = value;
                 _debugTextArray[x, y].text = _gridArray[x, y].ToString();
+                if (OnGridValueChanged != null)
+                    OnGridValueChanged(this, new Grid_HM.OnGridValueChangedEventArgs {x = x, y = y});
             }
         }
 
