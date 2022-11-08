@@ -2,7 +2,6 @@
 //      github.com/dkbozkurt
 
 using System;
-using Grid_System.Heatmap;
 using TMPro;
 using UnityEngine;
 
