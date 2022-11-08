@@ -2,7 +2,6 @@
 //      github.com/dkbozkurt
 
 using System;
-using TMPro;
 using UnityEngine;
 
 namespace Grid_System.Generate_Grid_System
@@ -80,7 +79,7 @@ namespace Grid_System.Generate_Grid_System
         public TextMesh CreateWorldText(Transform parent, string text, Vector3 localPosition, int fontSize, Color color,
             TextAnchor textAnchor, TextAlignment textAlignment, int sortingOrder)
         {
-            GameObject gameObject = new GameObject("World_Text", typeof(TextMeshPro));
+            GameObject gameObject = new GameObject("World_Text", typeof(TextMesh));
             Transform transform = gameObject.transform;
             transform.SetParent(parent, false);
             transform.localPosition = localPosition;
