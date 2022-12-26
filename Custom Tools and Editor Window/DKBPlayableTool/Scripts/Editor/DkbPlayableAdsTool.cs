@@ -16,7 +16,7 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
     /// <summary>
     /// TOOLS OPTION'S FUNCTIONS HAS TO BE 'STATIC' !!!
     /// </summary>
-    public class DKBPlayableTools : EditorWindow
+    public class DkbPlayableAdsTool : EditorWindow
     {
         private static GameObject _playableGameManager;
         private static GameObject _endCardConnectionsObj;
@@ -24,10 +24,10 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
 
         private Button _endCardButton;
 
-        [MenuItem("Tools/Dkbozkurt/PlayableTool")]
+        [MenuItem("Tools/Dkbozkurt/PlayableAdsTool")]
         public static void ShowWindow()
         {
-            GetWindow<DKBPlayableTools>("Dkbozkurt Playable Tool");
+            GetWindow<DKBPlayableTools>("Dkbozkurt Playable Ads Tool");
         }
 
         private void OnGUI()
