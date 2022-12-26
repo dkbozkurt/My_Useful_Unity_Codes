@@ -5,6 +5,7 @@ using System;
 using CpiTemplate.Game.Playable.Scripts.PlayableConnections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -20,6 +21,8 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
         private static GameObject _playableGameManager;
         private static GameObject _endCardConnectionsObj;
         private static GameObject _endCardParentCanvas;
+
+        private Button _endCardButton;
 
         [MenuItem("Tools/Dkbozkurt/PlayableTool")]
         public static void ShowWindow()
@@ -91,20 +94,37 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
 
             _endCardConnectionsObj = GenerateUIObject("EndCardController",_endCardParentCanvas.transform);
             var endCardController = _endCardConnectionsObj.AddComponent<EndCardController>();
-            _endCardConnectionsObj.GetComponent<RectTransform>().localPosition = Vector3.zero;
-
+            var endCardConnectionsRectTransform = _endCardConnectionsObj.GetComponent<RectTransform>();
+            endCardConnectionsRectTransform.anchorMin = Vector2.zero;
+            endCardConnectionsRectTransform.anchorMax = Vector2.one;
+            endCardConnectionsRectTransform.pivot = new Vector2(0.5f,0.5f);
+            endCardConnectionsRectTransform.offsetMax = new Vector2(0, 0);
+            endCardConnectionsRectTransform.offsetMin = new Vector2(0, 0);
+            
             #endregion
 
             #region EndCard Background
 
             GameObject endCardBackground = GenerateUIObject("EndCardBackground",_endCardConnectionsObj.transform);
             AddImageComponent(endCardBackground);
-            endCardBackground.GetComponent<Image>().raycastTarget = true;
-            var endCardButton = endCardBackground.AddComponent<Button>();
-            endCardButton.transition = Selectable.Transition.None;
-            // TODO burada cta controllerdan store a baglanmayi ayarlar.
-            // TODO ayrica pivotlari tum ekrana kaplat.
-            endCardController.EndCardBackground = endCardBackground.GetComponent<Image>();
+            var endCardBackgroundRectTransform = endCardBackground.GetComponent<RectTransform>();
+            endCardBackgroundRectTransform.anchorMin = Vector2.zero;
+            endCardBackgroundRectTransform.anchorMax = Vector2.one;
+            endCardBackgroundRectTransform.pivot = new Vector2(0.5f,0.5f);
+            endCardBackgroundRectTransform.offsetMax = new Vector2(0, 0);
+            endCardBackgroundRectTransform.offsetMin = new Vector2(0, 0);
+
+            var endCardBackgroundImage = endCardBackground.GetComponent<Image>();
+            endCardBackgroundImage.raycastTarget = true;
+            endCardBackgroundImage.color = new Color(0f, 0f, 0f, 0.75f);
+
+            endCardBackground.AddComponent<Button>();
+            _endCardButton = endCardBackground.GetComponent<Button>();
+            _endCardButton.transition = Selectable.Transition.None;
+            
+            AddStoreConnectionOntoButton(_endCardButton);
+
+            endCardController.EndCardBackground = endCardBackgroundImage;
             endCardBackground.SetActive(false);
 
             #endregion
@@ -114,6 +134,7 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
             GameObject endCardIcon = GenerateUIObject("EndCardIcon", endCardBackground.transform);
             AddImageComponent(endCardIcon);
             endCardController.EndCardIcon = endCardIcon.GetComponent<Image>();
+            LocateRectTransform(endCardIcon.GetComponent<RectTransform>(), new Vector2(0f,650f),new Vector2(650f,650f));
 
             #endregion
 
@@ -122,6 +143,7 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
             GameObject endCardText = GenerateUIObject("EndCardText", endCardBackground.transform);
             AddImageComponent(endCardText);
             endCardController.EndCardText = endCardText.GetComponent<Image>();
+            LocateRectTransform(endCardText.GetComponent<RectTransform>(),new Vector2(0f,-150f),new Vector2(1000f,400f));
 
             #endregion
 
@@ -130,6 +152,7 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
             GameObject endCardPlayButton = GenerateUIObject("EndCardPlayButton", endCardBackground.transform);
             AddImageComponent(endCardPlayButton);
             endCardController.EndCardPlayButton = endCardPlayButton.GetComponent<Image>();
+            LocateRectTransform(endCardPlayButton.GetComponent<RectTransform>(),new Vector2(0f,-800f),new Vector2(756f,300f));
 
             #endregion
         }
@@ -164,6 +187,23 @@ namespace Custom_Tools_And_Editor_Window.DKBPlayableTool.Scripts.Editor
             var image = targetObj.AddComponent<Image>();
             image.raycastTarget = false;
         }
-        
+
+        private void LocateRectTransform(RectTransform rectTransform,Vector2 location,Vector2 size)
+        {
+            rectTransform.anchoredPosition = location;
+            rectTransform.sizeDelta = size;
+        }
+
+        private void AddStoreConnectionOntoButton(Button button)
+        {
+            CallCtaController();
+            
+#if UNITY_EDITOR
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(button.onClick, new UnityAction(CtaController.Instance.OpenStore));
+#endif
+            // In run time, unity event listeners can be added by following lines. 
+            // button.onClick.AddListener(()=>CtaController.Instance.OpenStore());
+            // button.onClick.AddListener(delegate { CtaController.Instance.OpenStore(); });
+        }
     }
 }
