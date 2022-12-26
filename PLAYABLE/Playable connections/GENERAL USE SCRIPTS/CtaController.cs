@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CpiTemplate.Game.Playable.Scripts.PlayableConnections
 {
-    public class CtaController : MonoBehaviour
+    public class CtaController : SingletonBehaviour<CtaController>
     {
         [LunaPlaygroundField("Open store after seconds", 0, "Store Settings")] [SerializeField]
         private float _openStoreAfterSeconds = 9999;
@@ -13,6 +13,9 @@ namespace CpiTemplate.Game.Playable.Scripts.PlayableConnections
         private int _openStoreAfterTaps = 9999;
         
         private int _tapCounter;
+        
+        protected override void OnAwake() { }
+        
         private void Awake()
         {
             DoAfterSeconds(_openStoreAfterSeconds, OpenStore);
