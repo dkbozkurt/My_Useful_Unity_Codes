@@ -31,19 +31,64 @@ namespace DKBozkurt.Utils
         }
 
         /// <summary>
+        /// Get Mouse screen position reference to left bottom corner as 0,0
+        /// </summary>
+        /// <returns>Mouse screen position </returns>
+        public static Vector3 GetMouseScreenPosition()
+        {
+            return Input.mousePosition;
+        }
+
+        /// <summary>
+        /// It takes mouses's pixel position and converts it into a real world position.
+        /// Method will return x,y plane value seen by the camera in the 3D world with editable distanceFromCamera value on the z axis.
+        /// </summary>
+        /// <param name="distanceFromCamera">The z value that will be added to worldPointsDistance from the camera. </param>
+        /// <returns>Screen to world point position with a selected distance value from the camera.</returns>
+        public static Vector3 GetScreenToWorldPointWithDistance(float distanceFromCamera=0f)
+        {
+            var screenPosition = GetMouseScreenPosition();
+            screenPosition.z = Camera.nearClipPlane + distanceFromCamera;
+
+            var worldPosition = Camera.ScreenToWorldPoint(screenPosition);
+            return worldPosition;
+        }
+
+        /// <summary>
+        /// It takes mouses's pixel position on the screen and sends a ray from this point into the
+        /// to corresponding position in the real world position.
+        /// </summary>
+        /// <returns></returns>
+        public static Vector3 GetScreenPointToRay()
+        {
+            var screenPosition = GetMouseScreenPosition();
+
+            Ray ray = Camera.ScreenPointToRay(screenPosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                return hit.point;
+            }
+
+            return Vector3.zero;
+        }
+        
+        /////////////////////////////////////////////////////////////////////////////////////////
+        
+        /// <summary>
         /// Get Mouse Position in World with Z = 0f for Orthographic.
         /// Call in update function.
         /// </summary>
         /// <returns> Mouse position. </returns>
         public static Vector3 GetMouseWorldPositionOrthographic()
         {
-            Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+            Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera);
             vec.z = 0f;
             return vec;
         }
-
+        
         /// <summary>
-        /// Get Mouse Position in World with Z value
+        /// Get Mouse Position in World with Z value respect to Camera
         /// </summary>
         /// <param name="screenPosition"></param>
         /// <param name="worldCamera"></param>
@@ -60,7 +105,7 @@ namespace DKBozkurt.Utils
         /// <returns> Mouse position. </returns>
         public static Vector3 GetMouseWorldPositionWithZ()
         {
-            return GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+            return GetMouseWorldPositionWithZ(Input.mousePosition, Camera);
         }
 
         /// <summary>
