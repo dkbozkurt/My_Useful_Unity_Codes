@@ -8,22 +8,22 @@ namespace CpiTemplate.Game.Playable.Scripts.Controllers
     public class PlayerMovementController : MonoBehaviour
     {
         [Header("Movement Properties")]
-        [SerializeField] private float speed = 6f;
-        [SerializeField] private float turnSmoothTime = 0.05f;
+        [SerializeField] private float _speed = 6f;
+        [SerializeField] private float _turnSmoothTime = 0.05f;
 
         private CharacterController _characterController;
-        private Animator _animator;
+        // private Animator _animator;
 
         private float _inputX;
         private float _inputZ;
         private float _turnSmoothVelocity;
 
-        public bool PlayerIsMoving { get; set; }
+        public bool IsPlayerMoving { get; set; }
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-            _animator = GetComponentInChildren<Animator>();
+            // _animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()
@@ -42,16 +42,16 @@ namespace CpiTemplate.Game.Playable.Scripts.Controllers
             if (direction.magnitude >= 0.1f)
             {
                 Rotate(direction);
-                _characterController.Move(direction * (speed * Time.deltaTime));
-                PlayerIsMoving = true;
-                AnimationBoolSetter("Move",true);
+                _characterController.Move(direction * (_speed * Time.deltaTime));
+                IsPlayerMoving = true;
+                // AnimationBoolSetter("Move",true);
 
                 return;
             }
 
-            AnimationBoolSetter("Move",false);
+            // AnimationBoolSetter("Move",false);
             
-            PlayerIsMoving = false;
+            IsPlayerMoving = false;
         }
 
         private void Rotate(Vector3 direction)
@@ -60,15 +60,15 @@ namespace CpiTemplate.Game.Playable.Scripts.Controllers
 
             // Adding smooth turning
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-                turnSmoothTime);
+                _turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
-        public void AnimationBoolSetter(string animName, bool status)
-        {
-            _animator.SetBool(animName,status);
-        }
+        // public void AnimationBoolSetter(string animName, bool status)
+        // {
+        //     _animator.SetBool(animName,status);
+        // }
 
         private void PullPlayerDown(float heightFromGround)
         {
