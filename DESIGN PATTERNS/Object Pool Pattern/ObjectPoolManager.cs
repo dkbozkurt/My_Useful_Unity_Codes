@@ -26,16 +26,6 @@ namespace DESIGN_PATTERNS.Object_Pool_Pattern
         public GameObject ObjectToPool => _objectToPool;
         public int AmountToPool => _amountToPool;
         public List<GameObject> PooledObjects { get; set; } = new List<GameObject>();
-
-        public Quaternion ObjectInitialRotation;
-
-        public Vector3 ObjectInitialScale;
-        
-        private void Awake()
-        {
-            ObjectInitialRotation = _objectToPool.transform.rotation;
-            ObjectInitialScale = _objectToPool.transform.lossyScale;
-        }
     }
     
     /// <summary>
@@ -91,11 +81,6 @@ namespace DESIGN_PATTERNS.Object_Pool_Pattern
             pooledObject.SetActive(true);
 
             return pooledObject;
-        }
-
-        public void AddBackToPoolWithInitialValues(GameObject objectToDeactivate)
-        {
-            // TODO Find a way for here !!!
         }
         
         public void DeactivateAllPooledObjects()
