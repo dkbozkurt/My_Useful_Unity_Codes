@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-namespace Custom_Attributes
+namespace Custom_Attributes.NameAndActionAttribute
 {
     /// <summary>
     /// Custom Attributes
