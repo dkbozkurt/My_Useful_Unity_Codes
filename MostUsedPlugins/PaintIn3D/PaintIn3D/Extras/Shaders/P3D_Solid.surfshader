@@ -1,0 +1,126 @@
+﻿BEGIN_OPTIONS
+END_OPTIONS
+
+BEGIN_PROPERTIES
+	[NoScaleOffset]_MainTex("Albedo (RGB) Alpha (A)", 2D) = "white" {}
+	[NoScaleOffset][Normal]_BumpMap("Normal (RGBA)", 2D) = "bump" {}
+	[NoScaleOffset]_MetallicGlossMap("Metallic (R) Occlusion (G) Smoothness (B)", 2D) = "white" {}
+	[NoScaleOffset]_EmissionMap("Emission (RGB)", 2D) = "white" {}
+
+	_Color("Color", Color) = (1,1,1,1)
+	_BumpScale("Normal Map Strength", Range(0,5)) = 1
+	_Metallic("Metallic", Range(0,1)) = 0
+	_GlossMapScale("Smoothness", Range(0,1)) = 1
+	_Emission("Emission", Color) = (0,0,0)
+	_Tiling("Tiling (XY)", Vector) = (1,1,0,0)
+	[Toggle(_USE_UV2)] _UseUV2("Use Second UV", Float) = 0
+
+	[Header(OVERRIDE SETTINGS)]
+	[Toggle(_USE_UV2_ALT)] _UseUV2Alt("	Use Second UV", Float) = 1
+	[Toggle(_OVERRIDE_OPACITY)] _EnableOpacity("	Enable Opacity", Float) = 0
+	[Toggle(_OVERRIDE_NORMAL)] _EnableNormal("	Enable Normal", Float) = 0
+	[Toggle(_OVERRIDE_MOS)] _EnableMos("	Enable MOS", Float) = 0
+	[Toggle(_OVERRIDE_EMISSION)] _EnableEmission("	Enable Emission", Float) = 0
+
+	[Header(OVERRIDES)]
+	[NoScaleOffset]_AlbedoTex("	Premultiplied Albedo (RGB) Weight (A)", 2D) = "black" {}
+	[NoScaleOffset]_OpacityTex("	Premultiplied Opacity (R) Weight (A)", 2D) = "black" {}
+	[NoScaleOffset]_NormalTex("	Premultiplied Normal (RG) Weight (A)", 2D) = "black" {}
+	[NoScaleOffset]_MosTex("	Premultiplied Metallic (R) Occlusion (G) Smoothness (B) Weight (A)", 2D) = "black" {}
+	[NoScaleOffset]_EmissionTex("	Premultiplied Emission (RGB) Weight (A)", 2D) = "black" {}
+END_PROPERTIES
+
+BEGIN_CBUFFER
+	float4 _Color;
+	float  _BumpScale;
+	float  _Metallic;
+	float  _GlossMapScale;
+	float3 _Emission;
+	float2 _Tiling;
+	float  _UseUV2;
+	float  _UseUV2Alt;
+END_CBUFFER
+
+BEGIN_DEFINES
+   #pragma shader_feature_local _ _OVERRIDE_OPACITY
+   #pragma shader_feature_local _ _OVERRIDE_NORMAL
+   #pragma shader_feature_local _ _OVERRIDE_MOS
+   #pragma shader_feature_local _ _OVERRIDE_EMISSION
+END_DEFINES
+
+BEGIN_CODE
+	TEXTURE2D(_MainTex);
+	SAMPLER(sampler_MainTex);
+	TEXTURE2D(_BumpMap);
+	SAMPLER(sampler_BumpMap);
+	TEXTURE2D(_MetallicGlossMap);
+	SAMPLER(sampler_MetallicGlossMap);
+	TEXTURE2D(_EmissionMap);
+	SAMPLER(sampler_EmissionMap);
+
+	TEXTURE2D(_AlbedoTex);
+	SAMPLER(sampler_AlbedoTex);
+	TEXTURE2D(_OpacityTex);
+	SAMPLER(sampler_OpacityTex);
+	TEXTURE2D(_NormalTex);
+	SAMPLER(sampler_NormalTex);
+	TEXTURE2D(_EmissionTex);
+	SAMPLER(sampler_EmissionTex);
+	TEXTURE2D(_MosTex);
+	SAMPLER(sampler_MosTex);
+
+	void ModifyVertex(inout VertexData v, inout ExtraV2F d)
+	{
+		float4 first  = lerp(v.texcoord0, v.texcoord1, _UseUV2);
+		float4 second = lerp(v.texcoord0, v.texcoord1, _UseUV2Alt);
+
+		v.texcoord0.xy =  first.xy * _Tiling;
+		v.texcoord1.xy = second.xy;
+	}
+
+	void SurfaceFunction(inout Surface o, ShaderData d)
+	{
+		float4 texMain = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, d.texcoord0);
+		float4 gloss   = SAMPLE_TEXTURE2D(_MetallicGlossMap, sampler_MetallicGlossMap, d.texcoord0);
+		float4 bump    = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, d.texcoord0);
+		float4 glow    = SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, d.texcoord0);
+
+		o.Albedo     = texMain.rgb * _Color.rgb;
+		o.Normal     = UnpackScaleNormal(bump, _BumpScale);
+		o.Metallic   = gloss.r * _Metallic;
+		o.Occlusion  = gloss.g;
+		o.Smoothness = gloss.b * _GlossMapScale;
+		o.Emission   = glow.rgb * _Emission;
+		o.Alpha      = texMain.a * _Color.a;
+
+		// Override albedo?
+		float4 albedo = SAMPLE_TEXTURE2D(_AlbedoTex, sampler_AlbedoTex, d.texcoord1);
+		o.Albedo = (1.0f - albedo.a) * o.Albedo + albedo.rgb;
+
+	#if _OVERRIDE_OPACITY
+		float4 opacity = SAMPLE_TEXTURE2D(_OpacityTex, sampler_OpacityTex, d.texcoord1);
+		o.Alpha = (1.0f - opacity.a) * o.Alpha + opacity.r;
+	#endif
+
+	#if !_HAS_ALPHA_BLEND
+		clip(o.Alpha - 0.5f);
+	#endif
+
+	#if _OVERRIDE_NORMAL
+		float4 normal = SAMPLE_TEXTURE2D(_NormalTex, sampler_NormalTex, d.texcoord1);
+		o.Normal = (1.0f - normal.a) * o.Normal + normal.r;
+	#endif
+	
+	#if _OVERRIDE_MOS
+		float4 mos = SAMPLE_TEXTURE2D(_MosTex, sampler_MosTex, d.texcoord1);
+		o.Metallic   = (1.0f - mos.a) * o.Metallic + mos.r;
+		o.Occlusion  = (1.0f - mos.a) * o.Metallic + mos.g;
+		o.Smoothness = (1.0f - mos.a) * o.Metallic + mos.b;
+	#endif
+	
+	#if _OVERRIDE_EMISSION
+		float4 emission = SAMPLE_TEXTURE2D(_EmissionTex, sampler_EmissionTex, d.texcoord1);
+		o.Emission = (1.0f - emission.a) * o.Emission + emission.rgb;
+	#endif
+	}
+END_CODE

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2018-07-04T08:19:27Z</created><keywords></keywords><modified>2018-07-04T08:19:27Z</modified><revision></revision><subject></subject><title></title><unit meter="0.025400" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_materials>
+    <material id="Snow" name="Snow">
+      <instance_effect url="#Snow-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Snow-fx" name="Snow">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">1.000000  1.000000 1.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">1.000000  1.000000 1.000000 1.000000</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.000000  0.000000 0.000000 1.000000</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">2.000000</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0.000000  0.000000 0.000000 1.000000</color>
+            </reflective>
+            <reflectivity>
+              <float sid="reflectivity">1.000000</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">1.000000  1.000000 1.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">0.000000</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Snowball-lib" name="SnowballMesh">
+      <mesh>
+        <source id="Snowball-POSITION">
+          <float_array id="Snowball-POSITION-array" count="36">
+-0.006200 -0.322400 0.011800
+0.282100 -0.144200 0.011800
+0.082900 -0.144200 0.286000
+-0.239500 -0.144200 0.181200
+-0.239500 -0.144200 -0.157700
+0.082900 -0.144200 -0.262500
+0.227000 0.144200 -0.157700
+0.227000 0.144200 0.181200
+-0.095300 0.144200 0.286000
+-0.294600 0.144200 0.011800
+-0.095300 0.144200 -0.262500
+-0.006200 0.322400 0.011800
+</float_array>
+          <technique_common>
+            <accessor source="#Snowball-POSITION-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Snowball-Normal0">
+          <float_array id="Snowball-Normal0-array" count="180">
+0.491165 -0.794629 0.356820
+0.491165 -0.794629 0.356820
+0.491165 -0.794629 0.356820
+-0.187688 -0.794601 0.577392
+-0.187688 -0.794601 0.577392
+-0.187688 -0.794601 0.577392
+-0.607008 -0.794696 0.000000
+-0.607008 -0.794696 0.000000
+-0.607008 -0.794696 0.000000
+-0.187640 -0.794721 -0.577244
+-0.187640 -0.794721 -0.577244
+-0.187640 -0.794721 -0.577244
+0.491188 -0.794666 -0.356707
+0.491188 -0.794666 -0.356707
+0.491188 -0.794666 -0.356707
+0.982234 0.187660 0.000000
+0.982234 0.187660 0.000000
+0.982234 0.187660 0.000000
+0.303732 0.187673 0.934091
+0.303732 0.187673 0.934091
+0.303732 0.187673 0.934091
+-0.794568 0.187420 0.577525
+-0.794568 0.187420 0.577525
+-0.794568 0.187420 0.577525
+-0.794653 0.187517 -0.577377
+-0.794653 0.187517 -0.577377
+-0.794653 0.187517 -0.577377
+0.303732 0.187673 -0.934091
+0.303732 0.187673 -0.934091
+0.303732 0.187673 -0.934091
+0.794726 -0.187288 0.577350
+0.794726 -0.187288 0.577350
+0.794726 -0.187288 0.577350
+-0.303650 -0.187623 0.934128
+-0.303650 -0.187623 0.934128
+-0.303650 -0.187623 0.934128
+-0.982234 -0.187660 0.000000
+-0.982234 -0.187660 0.000000
+-0.982234 -0.187660 0.000000
+-0.303649 -0.187623 -0.934128
+-0.303649 -0.187623 -0.934128
+-0.303649 -0.187623 -0.934128
+0.794811 -0.187384 -0.577202
+0.794811 -0.187384 -0.577202
+0.794811 -0.187384 -0.577202
+0.187749 0.794582 0.577399
+0.187749 0.794582 0.577399
+0.187749 0.794582 0.577399
+-0.491026 0.794680 0.356898
+-0.491026 0.794680 0.356898
+-0.491026 0.794680 0.356898
+-0.491049 0.794717 -0.356785
+-0.491049 0.794717 -0.356785
+-0.491049 0.794717 -0.356785
+0.187701 0.794701 -0.577251
+0.187701 0.794701 -0.577251
+0.187701 0.794701 -0.577251
+0.607172 0.794571 0.000000
+0.607172 0.794571 0.000000
+0.607172 0.794571 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#Snowball-Normal0-array" count="60" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Snowball-UV0">
+          <float_array id="Snowball-UV0-array" count="44">
+0.600000 1.000000
+0.500000 0.647600
+0.700000 0.647600
+0.800000 1.000000
+0.900000 0.647600
+0.000000 1.000000
+-0.100000 0.647600
+0.100000 0.647600
+0.200000 1.000000
+0.300000 0.647600
+0.400000 1.000000
+0.400000 0.352400
+0.600000 0.352400
+0.800000 0.352400
+-0.200000 0.352400
+0.000000 0.352400
+0.200000 0.352400
+0.700000 0.000000
+-0.100000 0.000000
+0.100000 0.000000
+0.300000 0.000000
+0.500000 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#Snowball-UV0-array" count="22" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Snowball-VERTEX">
+          <input semantic="POSITION" source="#Snowball-POSITION"/>
+        </vertices>
+        <triangles count="20" material="Snow"><input semantic="VERTEX" offset="0" source="#Snowball-VERTEX"/><input semantic="NORMAL" offset="1" source="#Snowball-Normal0"/><input semantic="TEXCOORD" offset="2" set="0" source="#Snowball-UV0"/><p> 0 0 0 1 1 1 2 2 2 0 3 3 2 4 2 3 5 4 0 6 5 3 7 6 4 8 7 0 9 8 4 10 7 5 11 9 0 12 10 5 13 9 1 14 1 1 15 1 6 16 11 7 17 12 2 18 2 7 19 12 8 20 13 3 21 6 8 22 14 9 23 15 4 24 7 9 25 15 10 26 16 5 27 9 10 28 16 6 29 11 7 30 12 2 31 2 1 32 1 8 33 13 3 34 4 2 35 2 9 36 15 4 37 7 3 38 6 10 39 16 5 40 9 4 41 7 6 42 11 1 43 1 5 44 9 11 45 17 8 46 13 7 47 12 11 48 18 9 49 15 8 50 14 11 51 19 10 52 16 9 53 15 11 54 20 6 55 11 10 56 16 11 57 21 7 58 12 6 59 11</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Snowball" name="Snowball">
+      <node name="Snowball" id="Snowball" sid="Snowball"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#Snowball-lib"><bind_material><technique_common><instance_material symbol="Snow" target="#Snow"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <extra><technique profile="MAX3D"><frame_rate>30.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.000000</start_time><end_time>3.333333</end_time></technique></extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Snowball"></instance_visual_scene>
+  </scene>
+</COLLADA>

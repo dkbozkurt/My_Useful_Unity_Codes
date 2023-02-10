@@ -1,0 +1,190 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b7bb1a755a97c419261f15b7ced2ca, type: 3}
+  m_Name: Normal (RGBA)
+  m_EditorClassIdentifier: 
+  index: 10
+  textureDatas:
+  - Name: Normal
+    BlendMode:
+      Index: 13
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      Texture: {fileID: 0}
+      Kernel: 1
+      Channels: {x: 1, y: 1, z: 1, w: 1}
+  shaderData: '_BumpMap@Standard (Specular setup)
+
+    _BumpMap@Standard
+
+    _BumpMap@Autodesk
+    Interactive
+
+    _BumpMap@Legacy Shaders/Bumped Diffuse
+
+    _BumpMap@Legacy
+    Shaders/Bumped Specular
+
+    _BumpMap@Legacy Shaders/Self-Illumin/Bumped Diffuse
+
+    _BumpMap@Legacy
+    Shaders/Self-Illumin/Bumped Specular
+
+    _BumpMap@Legacy Shaders/Reflective/Bumped
+    Unlit
+
+    _BumpMap@Legacy Shaders/Reflective/Bumped Diffuse
+
+    _BumpMap@Legacy
+    Shaders/Reflective/Bumped VertexLit
+
+    _BumpMap@Legacy Shaders/Reflective/Bumped
+    Specular
+
+    _BumpMap@Legacy Shaders/Transparent/Bumped Diffuse
+
+    _BumpMap@Legacy
+    Shaders/Transparent/Bumped Specular
+
+    _BumpMap@Legacy Shaders/Transparent/Cutout/Bumped
+    Diffuse
+
+    _BumpMap@Legacy Shaders/Transparent/Cutout/Bumped Specular
+
+    _BumpMap@Legacy
+    Shaders/Parallax Diffuse
+
+    _BumpMap@Legacy Shaders/Parallax Specular
+
+    _BumpMap@Legacy
+    Shaders/Self-Illumin/Parallax Diffuse
+
+    _BumpMap@Legacy Shaders/Self-Illumin/Parallax
+    Specular
+
+    _BumpMap@Legacy Shaders/Reflective/Parallax Diffuse
+
+    _BumpMap@Legacy
+    Shaders/Reflective/Parallax Specular
+
+    _BumpMap@Legacy Shaders/Transparent/Parallax
+    Diffuse
+
+    _BumpMap@Legacy Shaders/Transparent/Parallax Specular
+
+    _BumpMap@Particles/Standard
+    Surface
+
+    _BumpMap@Particles/Standard Unlit
+
+    _NormalTex@Hidden/TerrainEngine/CameraFacingBillboardTree
+
+    _BumpMap@Legacy
+    Shaders/Lightmapped/Bumped Diffuse
+
+    _BumpMap@Legacy Shaders/Lightmapped/Bumped
+    Specular
+
+    _BumpMap@Nature/Tree Creator Bark
+
+    _BumpMap@Nature/Tree Creator
+    Leaves
+
+    _BumpMap@Mobile/Bumped Diffuse
+
+    _BumpMap@Mobile/Bumped Specular
+
+    _BumpMap@Mobile/Bumped
+    Specular (1 Directional Realtime Light)
+
+    _MainBump@UI/Lit/Bumped
+
+    _MainBump@UI/Lit/Detail
+
+    _MainBump@UI/Lit/Refraction
+
+    _MainBump@UI/Lit/Refraction
+    Detail
+
+    _BumpMap@Nature/SpeedTree
+
+    _BumpMap@Nature/SpeedTree Billboard
+
+    _BumpMap@Nature/SpeedTree8
+
+    _BUMP_MAP@HDRP/3DSMaxPhysicalMaterial/PhysicalMaterial3DsMax
+
+    _NORMAL_MAP@HDRP/ArnoldStandardSurface/ArnoldStandardSurface
+
+    _BumpMap@HDRP/Autodesk
+    Interactive/AutodeskInteractive
+
+    _BumpMap@HDRP/Autodesk Interactive/AutodeskInteractiveMasked
+
+    _BumpMap@HDRP/Autodesk
+    Interactive/AutodeskInteractiveTransparent
+
+    _NormalMap@HDRP/Decal
+
+    _NormalMap@HDRP/Lit
+
+    _BumpMap@Paint
+    in 3D/Alpha
+
+    _BumpMap@Paint in 3D/Overlay
+
+    _BumpMap@Paint in 3D/Solid
+
+    _NORMAL_MAP@Shader
+    Graphs/ArnoldStandardSurface
+
+    _NORMAL_MAP@Shader Graphs/ArnoldStandardSurfaceTransparent
+
+    _BUMP_MAP@Shader
+    Graphs/PhysicalMaterial3DsMax
+
+    _BUMP_MAP@Shader Graphs/PhysicalMaterial3DsMaxTransparent
+
+    _NormalMap@Universal
+    Render Pipeline/2D/Sprite-Lit-Default
+
+    _BumpMap@Universal Render Pipeline/Autodesk
+    Interactive/Autodesk Interactive
+
+    _BumpMap@Universal Render Pipeline/Autodesk
+    Interactive/Autodesk Interactive Masked
+
+    _BumpMap@Universal Render Pipeline/Autodesk
+    Interactive/Autodesk Interactive Transparent
+
+    _BumpMap@Universal Render Pipeline/Baked
+    Lit
+
+    _BumpMap@Universal Render Pipeline/Lit
+
+    _BumpMap@Universal Render
+    Pipeline/Nature/SpeedTree7
+
+    _BumpMap@Universal Render Pipeline/Nature/SpeedTree7
+    Billboard
+
+    _BumpMap@Universal Render Pipeline/Nature/SpeedTree8
+
+    _BumpMap@Universal
+    Render Pipeline/Particles/Lit
+
+    _BumpMap@Universal Render Pipeline/Particles/Simple
+    Lit
+
+    _BumpMap@Universal Render Pipeline/Particles/Unlit
+
+    _BumpMap@Universal
+    Render Pipeline/Simple Lit'

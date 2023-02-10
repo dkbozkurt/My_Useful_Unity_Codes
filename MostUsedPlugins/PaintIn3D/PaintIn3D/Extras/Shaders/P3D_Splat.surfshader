@@ -1,0 +1,61 @@
+﻿BEGIN_PROPERTIES
+	[NoScaleOffset]_SplatMap("Splat Map (R, G, B, A)", 2D) = "black" {}
+	
+	[NoScaleOffset]_MainTex("Base Albedo (RGB)", 2D) = "white" {}
+	[NoScaleOffset]_MainTexR("Albedo R (RGB)", 2D) = "white" {}
+	[NoScaleOffset]_MainTexG("Albedo G (RGB)", 2D) = "white" {}
+	[NoScaleOffset]_MainTexB("Albedo B (RGB)", 2D) = "white" {}
+	[NoScaleOffset]_MainTexA("Albedo A (RGB)", 2D) = "white" {}
+
+	_Color("Color", Color) = (1,1,1,1)
+	_Metallic("Metallic", Range(0,1)) = 0
+	_GlossMapScale("Smoothness", Range(0,1)) = 1
+	_Tiling("Tiling (XY)", Vector) = (1,1,0,0)
+END_PROPERTIES
+
+BEGIN_CBUFFER
+	float4 _Color;
+	float  _Metallic;
+	float  _GlossMapScale;
+	float2 _Tiling;
+END_CBUFFER
+
+BEGIN_CODE
+	TEXTURE2D(_SplatMap);
+	SAMPLER(sampler_SplatMap);
+	TEXTURE2D(_MainTex);
+	SAMPLER(sampler_MainTex);
+
+	TEXTURE2D(_MainTexR);
+	SAMPLER(sampler_MainTexR);
+	TEXTURE2D(_MainTexG);
+	SAMPLER(sampler_MainTexG);
+	TEXTURE2D(_MainTexB);
+	SAMPLER(sampler_MainTexB);
+	TEXTURE2D(_MainTexA);
+	SAMPLER(sampler_MainTexA);
+
+	void ModifyVertex(inout VertexData v, inout ExtraV2F d)
+	{
+		v.texcoord1.xy = v.texcoord0.xy * _Tiling;
+	}
+
+	void SurfaceFunction(inout Surface o, ShaderData d)
+	{
+		float4 splat   = SAMPLE_TEXTURE2D(_SplatMap, sampler_SplatMap, d.texcoord0);
+		float4 albedo  = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, d.texcoord1);
+		float4 albedoR = SAMPLE_TEXTURE2D(_MainTexR, sampler_MainTexR, d.texcoord1);
+		float4 albedoG = SAMPLE_TEXTURE2D(_MainTexG, sampler_MainTexG, d.texcoord1);
+		float4 albedoB = SAMPLE_TEXTURE2D(_MainTexB, sampler_MainTexB, d.texcoord1);
+		float4 albedoA = SAMPLE_TEXTURE2D(_MainTexA, sampler_MainTexA, d.texcoord1);
+
+		albedo = lerp(albedo, albedoR, splat.r);
+		albedo = lerp(albedo, albedoG, splat.g);
+		albedo = lerp(albedo, albedoB, splat.b);
+		albedo = lerp(albedo, albedoA, splat.a);
+
+		o.Albedo     = albedo;
+		o.Metallic   = _Metallic;
+		o.Smoothness = _GlossMapScale;
+	}
+END_CODE

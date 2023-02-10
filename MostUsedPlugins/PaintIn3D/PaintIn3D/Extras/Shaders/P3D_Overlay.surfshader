@@ -1,0 +1,63 @@
+﻿BEGIN_OPTIONS
+	Queue "Transparent"
+	Alpha "Blend"
+END_OPTIONS
+
+BEGIN_PASS("All")
+	ZWrite Off
+END_PASS
+
+BEGIN_PROPERTIES
+	[NoScaleOffset]_MainTex("Albedo (RGB) Alpha (A)", 2D) = "white" {}
+	[NoScaleOffset][Normal]_BumpMap("Normal (RGBA)", 2D) = "bump" {}
+	[NoScaleOffset]_MetallicGlossMap("Metallic (R) Occlusion (G) Smoothness (B)", 2D) = "white" {}
+	[NoScaleOffset]_EmissionMap("Emission (RGB)", 2D) = "white" {}
+
+	_Color("Color", Color) = (1,1,1,1)
+	_BumpScale("Normal Map Strength", Range(0,5)) = 1
+	_Metallic("Metallic", Range(0,1)) = 0
+	_GlossMapScale("Smoothness", Range(0,1)) = 1
+	_Emission("Emission", Color) = (0,0,0)
+	[Toggle(_USE_UV2)] _UseUV2("Use Second UV", Float) = 0
+END_PROPERTIES
+
+BEGIN_CBUFFER
+	float4 _Color;
+	float  _BumpScale;
+	float  _Metallic;
+	float  _GlossMapScale;
+	float3 _Emission;
+	float  _UseUV2;
+END_CBUFFER
+
+BEGIN_CODE
+	TEXTURE2D(_MainTex);
+	SAMPLER(sampler_MainTex);
+	TEXTURE2D(_BumpMap);
+	SAMPLER(sampler_BumpMap);
+	TEXTURE2D(_MetallicGlossMap);
+	SAMPLER(sampler_MetallicGlossMap);
+	TEXTURE2D(_EmissionMap);
+	SAMPLER(sampler_EmissionMap);
+
+	void ModifyVertex(inout VertexData v, inout ExtraV2F d)
+	{
+		v.texcoord0 = lerp(v.texcoord0, v.texcoord1, _UseUV2);
+	}
+
+	void SurfaceFunction(inout Surface o, ShaderData d)
+	{
+		float4 texMain = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, d.texcoord0);
+		float4 bump    = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, d.texcoord0);
+		float4 gloss   = SAMPLE_TEXTURE2D(_MetallicGlossMap, sampler_MetallicGlossMap, d.texcoord0);
+		float4 glow    = SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, d.texcoord0);
+
+		o.Albedo     = texMain.rgb * _Color.rgb;
+		o.Normal     = UnpackScaleNormal(bump, _BumpScale);
+		o.Metallic   = gloss.r * _Metallic;
+		o.Occlusion  = gloss.g;
+		o.Smoothness = gloss.b * _GlossMapScale;
+		o.Emission   = glow.rgb * _Emission;
+		o.Alpha      = texMain.a * _Color.a;
+	}
+END_CODE

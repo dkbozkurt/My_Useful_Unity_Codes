@@ -1,0 +1,12 @@
+﻿BEGIN_OPTIONS
+	Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+	Alpha "Blend"
+END_OPTIONS
+
+BEGIN_SUBSHADERS
+	"P3D_Solid.surfshader"
+END_SUBSHADERS
+
+BEGIN_DEFINES
+	#define _HAS_ALPHA_BLEND 1
+END_DEFINES
