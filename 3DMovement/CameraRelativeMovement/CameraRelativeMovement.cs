@@ -1,10 +1,9 @@
 // Dogukan Kaan Bozkurt
 //      github.com/dkbozkurt
 
-using System;
 using UnityEngine;
 
-namespace _3DMovement.Camera_Based_Movement
+namespace _3DMovement.CameraRelativeMovement
 {
     /// <summary>
     /// Attach script onto object that gonna be moved.
@@ -44,6 +43,10 @@ namespace _3DMovement.Camera_Based_Movement
             // Get Camera Normalized Directional Vectors
             Vector3 forward = _mainCam.transform.forward;
             Vector3 right = _mainCam.transform.right;
+            
+            // If you need to remove Space.World from the Translate line apply the following steps for above lines
+            // Vector3 forward = transform.InverseTransformVector(_mainCam.transform.forward);
+            // Vector3 right = transform.InverseTransformVector(_mainCam.transform.right);
 
             forward.y = 0;
             right.y = 0;
