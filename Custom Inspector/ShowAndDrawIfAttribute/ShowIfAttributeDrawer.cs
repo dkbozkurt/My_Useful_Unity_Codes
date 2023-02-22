@@ -13,7 +13,7 @@ namespace ShowAndDrawIfAttribute
     /// <summary>
     /// Ref : https://stackoverflow.com/questions/58441744/how-to-enable-disable-a-list-in-unity-inspector-using-a-bool
     /// </summary>
-    [CustomPropertyDrawer(typeof(ShowIfAttribute),true)]
+    [CustomPropertyDrawer(typeof(ShowIf),true)]
     public class ShowIfAttributeDrawer : PropertyDrawer
     {
         #region Reflection helpers.
@@ -68,7 +68,7 @@ namespace ShowAndDrawIfAttribute
 
     private bool MeetsConditions(SerializedProperty property)
     {
-        var showIfAttribute = this.attribute as ShowIfAttribute;
+        var showIfAttribute = this.attribute as ShowIf;
         var target = property.serializedObject.targetObject;
         List<bool> conditionValues = new List<bool>();
 
@@ -122,7 +122,7 @@ namespace ShowAndDrawIfAttribute
     {
         // Calcluate the property height, if we don't meet the condition and the draw mode is DontDraw, then height will be 0.
         bool meetsCondition = MeetsConditions(property);
-        var showIfAttribute = this.attribute as ShowIfAttribute;
+        var showIfAttribute = this.attribute as ShowIf;
 
         if (!meetsCondition && showIfAttribute.Action == 
                                        ActionOnConditionFail.DontDraw)
@@ -141,7 +141,7 @@ namespace ShowAndDrawIfAttribute
             return; 
         }
 
-        var showIfAttribute = this.attribute as ShowIfAttribute;
+        var showIfAttribute = this.attribute as ShowIf;
         if(showIfAttribute.Action == ActionOnConditionFail.DontDraw)
         {
             return;

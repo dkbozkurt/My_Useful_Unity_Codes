@@ -27,13 +27,13 @@ namespace ShowAndDrawIfAttribute
     /// Ref : https://stackoverflow.com/questions/58441744/how-to-enable-disable-a-list-in-unity-inspector-using-a-bool
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false,Inherited = true)]
-    public class ShowIfAttribute : PropertyAttribute
+    public class ShowIf : PropertyAttribute
     {
         public ActionOnConditionFail Action { get; private set; }
         public ConditionOperator Operator { get; private set; }
         public string[] Conditions { get; private set; }
 
-        public ShowIfAttribute(ActionOnConditionFail action, ConditionOperator conditionOperator,
+        public ShowIf(ActionOnConditionFail action, ConditionOperator conditionOperator,
             params string[] conditions)
         {
             Action = action;
