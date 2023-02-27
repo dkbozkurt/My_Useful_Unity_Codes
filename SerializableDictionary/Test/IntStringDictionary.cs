@@ -1,8 +1,7 @@
 using System;
-using UnityEngine;
-using SerializableDictionary.Scripts.Helpers;
+using SerializableDictionary.Runtime;
 
-namespace SerializableDictionary.Scripts.Test
+namespace SerializableDictionary.Test
 {
     [Serializable]
     public class IntStringDictionary : SerializableDictionary<int,string> { }

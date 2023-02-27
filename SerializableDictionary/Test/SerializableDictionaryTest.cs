@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SerializableDictionary.Scripts.Test
+namespace SerializableDictionary.Test
 {
     public class SerializableDictionaryTest : MonoBehaviour
     {
