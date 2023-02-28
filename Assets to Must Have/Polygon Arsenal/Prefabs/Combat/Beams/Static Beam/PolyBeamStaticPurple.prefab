@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3279759220021890838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3279759220021890836}
+  - component: {fileID: 3279759220021890839}
+  m_Layer: 0
+  m_Name: PolyBeamStaticPurple
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3279759220021890836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279759220021890838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3279759220021890839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279759220021890838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c23a8bcd5b0134d84a61ddd807fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beamLineRendererPrefab: {fileID: 1183769534669174, guid: 17738fed9dc653546a3da3b453104cda,
+    type: 3}
+  beamStartPrefab: {fileID: 1234282256186922, guid: 70fc113bb2609c544ba484a8da40dae1,
+    type: 3}
+  beamEndPrefab: {fileID: 1957732377295988, guid: fc2e63a27072d054ab10c3ecca3aa3f5,
+    type: 3}
+  alwaysOn: 1
+  beamCollides: 1
+  beamLength: 100
+  beamEndOffset: 0
+  textureScrollSpeed: 0
+  textureLengthScale: 1
