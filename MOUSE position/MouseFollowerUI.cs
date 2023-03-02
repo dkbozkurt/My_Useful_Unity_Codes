@@ -1,83 +1,90 @@
-// Dogukan Kaan Bozkurt
-//      github.com/dkbozkurt
-
-using System;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 
-/// <summary>
-/// Mouse follower UI elements
-/// </summary>
-public class MouseFollowerUI : MonoBehaviour
+namespace Hybrid.Game.Creative.Scripts.Controllers
 {
-    private List<GameObject> mouseImages = new List<GameObject>();
-    private int _currentImageIndex = 0;
-    private bool _mouse = true;
-    private Animator _animator;
-
-    private void Start()
+    public class MouseFollowerUI : MonoBehaviour
     {
-        AssignMouseImages();
-        CursorSettings();
-        _animator = GetComponent<Animator>();
-    }
+        [SerializeField] private Transform _handsPivot;
+        [SerializeField] private GameObject[] _mouseImages;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        private bool _mickeyHandIsOn = true;
+        private bool _isCursorOn = true;
+        private int _lastActivatedMouseImageIndex = 0;
+
+        private void Awake()
         {
-            _mouse = !_mouse;
-            CursorSettings();
+            _handsPivot.gameObject.SetActive(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        private void Start()
         {
-            if (_currentImageIndex < mouseImages.Count-1) _currentImageIndex++;
+            CursorSettings();
+
+            ChangeMouseImage();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _isCursorOn = !_isCursorOn;
+                CursorSettings();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                ChangeMouseImage();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                AnimateFollowerClicked(true);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                AnimateFollowerClicked(false);
+            }
+
+            FollowMouse();
+        }
+
+        private void CursorSettings()
+        {
+            Cursor.visible = _isCursorOn;
+            _handsPivot.gameObject.SetActive(!_isCursorOn);
+        }
+
+        private void AnimateFollowerClicked(bool status)
+        {
+            _handsPivot.DOKill();
+
+            if (status)
+            {
+                _handsPivot.DOScale(Vector3.one * 0.8f, 0.1f).SetEase(Ease.Linear);
+            }
             else
             {
-                _currentImageIndex = 0;
+                _handsPivot.DOScale(Vector3.one, 0.1f).SetEase(Ease.Linear);
             }
-            ChangeCursorImage();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        private void ChangeMouseImage()
         {
-            _animator.SetBool("clicked",true);
+            if (_lastActivatedMouseImageIndex >= _mouseImages.Length) { _lastActivatedMouseImageIndex = 0; }
+
+            for (int i = 0; i < _mouseImages.Length; i++)
+            {
+                _mouseImages[i].SetActive(i == _lastActivatedMouseImageIndex);
+            }
+
+            _lastActivatedMouseImageIndex++;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        private void FollowMouse()
         {
-            _animator.SetBool("clicked",false);
+            transform.position = Input.mousePosition;
         }
-
-        FollowMouse();
-    }
-
-    private void AssignMouseImages()
-    {
-        foreach (Transform images in transform.GetChild(0))
-        {
-            mouseImages.Add(images.gameObject);
-        }
-    }
-
-    private void CursorSettings()
-    {
-        Cursor.visible = _mouse;
-        transform.GetChild(0).gameObject.SetActive(!_mouse);
-    }
-
-    private void ChangeCursorImage()
-    {
-        for (int i=0;i < mouseImages.Count;i++)
-        {
-            mouseImages[i].SetActive(false);
-        }
-        mouseImages[_currentImageIndex].SetActive(true);
-    }
-
-    private void FollowMouse()
-    {
-        transform.position = Input.mousePosition;
     }
 }
