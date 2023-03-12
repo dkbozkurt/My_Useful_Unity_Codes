@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game_Mechanics.BasicFlightSimulator.Scripts
 {
     /// <summary>
-    /// Ref : https://github.com/13ozkan/FlightSimulator/blob/main/Assets/Scripts/AirplaneController.cs
+    /// Ref : https://www.youtube.com/watch?v=wq5YYldv1gw
     /// </summary>
 
     public class FlightSimulatorController : MonoBehaviour
@@ -34,7 +34,7 @@ namespace Game_Mechanics.BasicFlightSimulator.Scripts
             float roll = Mathf.Lerp(0, 30, Mathf.Abs(hortizontalInput)) * -Mathf.Sign(hortizontalInput);
 
             transform.localRotation = Quaternion.Euler(Vector3.up * _yaw);
-            transform.localRotation = Quaternion.Euler(Vector3.up * _yaw + Vector3.right * pitch);
+            transform.localRotation = Quaternion.Euler(Vector3.up * _yaw + Vector3.right * pitch + Vector3.forward * roll);
         }
     }
 }
