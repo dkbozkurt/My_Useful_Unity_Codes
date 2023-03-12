@@ -9,7 +9,7 @@ namespace Game_Mechanics.BasicCarSimulator.Scripts.Controllers
     ///
     /// Transform Based Car Movement
     /// 
-    /// Ref : https://github.com/13ozkan/CarSimulator
+    /// Ref : https://www.youtube.com/watch?v=BSybcKPQCnc
     /// </summary>
     public class CarController : MonoBehaviour
     {
@@ -30,18 +30,22 @@ namespace Game_Mechanics.BasicCarSimulator.Scripts.Controllers
 
         private void Move()
         {
+            // Moving
             _moveForce += transform.forward * _moveSpeed * InputController.Instance.GetVerticalInput() * _steerAngle * Time.deltaTime;
             transform.position += _moveForce * Time.deltaTime;
         }
 
         private void Rotate()
         {
+            // Steering
             float steerInput = InputController.Instance.GetHorizontalInput();
             transform.Rotate(Vector3.up * steerInput * _moveForce.magnitude * _steerAngle * Time.deltaTime);
 
+            // Drag
             _moveForce *= _drag;
             _moveForce = Vector3.ClampMagnitude(_moveForce, _maxSpeed);
 
+            // Traction
             Debug.DrawRay(transform.position, _moveForce.normalized * 3);
             Debug.DrawRay(transform.position, transform.forward * 3, Color.blue);
 
