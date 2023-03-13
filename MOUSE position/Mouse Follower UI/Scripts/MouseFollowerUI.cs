@@ -1,20 +1,33 @@
-﻿using DG.Tweening;
+﻿// Dogukan Kaan Bozkurt
+//      github.com/dkbozkurt
+
+using DG.Tweening;
 using UnityEngine;
 
-namespace Hybrid.Game.Creative.Scripts.Controllers
+namespace MousePosition___MouseClick.Mouse_Follower_UI.Scripts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MouseFollowerUI : MonoBehaviour
     {
-        [SerializeField] private Transform _handsPivot;
+        [SerializeField] [Multiline] private string _notes = "Space : Hand images activate toggle.\nQ : To Change hand image.";
+        
+        [Space]
+        [SerializeField] private Transform _handImagesPivot;
         [SerializeField] private GameObject[] _mouseImages;
 
-        private bool _mickeyHandIsOn = true;
         private bool _isCursorOn = true;
         private int _lastActivatedMouseImageIndex = 0;
 
         private void Awake()
         {
-            _handsPivot.gameObject.SetActive(false);
+            _handImagesPivot.gameObject.SetActive(false);
+
+            foreach (var image in _mouseImages)
+            {
+                image.SetActive(false);
+            }
         }
 
         private void Start()
@@ -26,14 +39,16 @@ namespace Hybrid.Game.Creative.Scripts.Controllers
 
         private void Update()
         {
+            FollowMouse();
+            
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 _isCursorOn = !_isCursorOn;
                 CursorSettings();
             }
-
-            if (Input.GetKeyDown(KeyCode.Q))
+            else if (Input.GetKeyDown(KeyCode.Q))
             {
+                if(_isCursorOn) return;
                 ChangeMouseImage();
             }
 
@@ -41,32 +56,30 @@ namespace Hybrid.Game.Creative.Scripts.Controllers
             {
                 AnimateFollowerClicked(true);
             }
-
-            if (Input.GetMouseButtonUp(0))
+            else if (Input.GetMouseButtonUp(0))
             {
                 AnimateFollowerClicked(false);
             }
 
-            FollowMouse();
         }
 
         private void CursorSettings()
         {
             Cursor.visible = _isCursorOn;
-            _handsPivot.gameObject.SetActive(!_isCursorOn);
+            _handImagesPivot.gameObject.SetActive(!_isCursorOn);
         }
 
         private void AnimateFollowerClicked(bool status)
         {
-            _handsPivot.DOKill();
+            _handImagesPivot.DOKill();
 
             if (status)
             {
-                _handsPivot.DOScale(Vector3.one * 0.8f, 0.1f).SetEase(Ease.Linear);
+                _handImagesPivot.DOScale(Vector3.one * 0.8f, 0.1f).SetEase(Ease.Linear);
             }
             else
             {
-                _handsPivot.DOScale(Vector3.one, 0.1f).SetEase(Ease.Linear);
+                _handImagesPivot.DOScale(Vector3.one, 0.1f).SetEase(Ease.Linear);
             }
         }
 
