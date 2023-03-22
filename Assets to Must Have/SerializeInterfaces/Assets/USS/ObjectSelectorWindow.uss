@@ -1,0 +1,84 @@
+﻿:root
+{
+	--dark-border-color: #232323;
+}
+
+Tab
+{
+	align-self: flex-start;
+	color: rgba(0, 0, 0, 0);
+	border-width: 1px 1px 0px 1px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	margin: 0;
+}
+
+Tab:hover
+{
+	background-color: #303030;
+	border-color: rgba(0, 0, 0, 0);
+}
+
+Tab:active
+{
+	background-color: #434343;
+	border-color: var(--dark-border-color);
+}
+
+Tab:checked
+{
+	background-color: #333333;
+	border-color: var(--dark-border-color);
+}
+
+Tab #unity-checkmark
+{
+	display: none;
+}
+
+Tab > .unity-base-field__input
+{
+	flex-grow: 0;
+	padding: 1px 2px 1px 2px;
+}
+
+ListView
+{
+	flex-grow: 1;
+	background-color: #333333;
+	border-color: var(--dark-border-color);
+	border-top-width: 1px;
+}
+
+ToolbarSearchField
+{
+	width: auto;
+}
+
+.details
+{
+	background-color: #2A2A2A;
+	color: #AAAAAA;
+	border-color: #404040;
+	border-width: 1px 0 0 0;
+	padding: 4px 0px 2px 20px;
+	font-size: 12px;
+	flex-direction: row;
+}
+
+.list-item
+{
+	padding-left:  17px;
+	flex-direction: row;
+}
+
+.list-item__text
+{
+	flex-grow: 1;
+	padding-left: 3px;
+}
+
+.list-item__icon
+{
+	flex-basis: 14px;
+}
