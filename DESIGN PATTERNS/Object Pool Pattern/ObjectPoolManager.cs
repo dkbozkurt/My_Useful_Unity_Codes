@@ -28,9 +28,6 @@ namespace DESIGN_PATTERNS.Object_Pool_Pattern
         public List<GameObject> PooledObjects { get; set; } = new List<GameObject>();
     }
     
-    /// <summary>
-    /// Ref : 
-    /// </summary>
     public class ObjectPoolManager : MonoBehaviour
     {
         [SerializeField] private ObjectPoolItem[] _objectPoolItems;
