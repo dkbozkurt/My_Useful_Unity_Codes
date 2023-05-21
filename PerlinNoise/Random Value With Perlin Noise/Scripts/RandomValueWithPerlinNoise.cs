@@ -4,17 +4,13 @@
 using System;
 using UnityEngine;
 
-namespace ImportantSnackScripts.PerlinNoise
+namespace PerlinNoise.Random_Value_With_Perlin_Noise.Scripts
 {
-    /// <summary>
-    /// Ref : 
-    /// </summary>
-
     public class RandomValueWithPerlinNoise : MonoBehaviour
     {
         [SerializeField]private int _width=20;
         [SerializeField]private int _depth=20;
-        [SerializeField]private GameObject _cube;
+        [SerializeField]private GameObject _objectPrefab;
 
         [Header("Perlin Noise Properties")]
         [SerializeField] private float _perlinNoiseAmplitude = 0.2f;
@@ -30,9 +26,10 @@ namespace ImportantSnackScripts.PerlinNoise
                                     _perlinNoiseMultiplier;
 
                     Vector3 pos = new Vector3(x, positionY, z);
-                    GameObject go = Instantiate(_cube, pos, Quaternion.identity);
+                    GameObject go = Instantiate(_objectPrefab, pos, Quaternion.identity);
                 }
             }
         }
+        
     }
 }
