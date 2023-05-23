@@ -84,18 +84,18 @@ namespace ScrollView.InfiniteScroll.Scripts
 
             int endItemIndex = _positiveDrag ? _scrollRect.content.childCount - 1 : 0;
             Transform endItem = _scrollRect.content.GetChild(endItemIndex);
-            Vector2 newPos = endItem.position;
+            Vector2 newPos = endItem.localPosition;
 
             if (_positiveDrag)
             {
-                newPos.y = endItem.position.y - _scrollContent.ChildHeight * 1f - _scrollContent.ItemSpacing;
+                newPos.y = endItem.localPosition.y - _scrollContent.ChildHeight * 1f - _scrollContent.ItemSpacing;
             }
             else
             {
-                newPos.y = endItem.position.y + _scrollContent.ChildHeight * 1f + _scrollContent.ItemSpacing;
+                newPos.y = endItem.localPosition.y + _scrollContent.ChildHeight * 1f + _scrollContent.ItemSpacing;
             }
 
-            currItem.position = newPos;
+            currItem.localPosition = newPos;
             currItem.SetSiblingIndex(endItemIndex);
         }
 
@@ -110,18 +110,18 @@ namespace ScrollView.InfiniteScroll.Scripts
 
             int endItemIndex = _positiveDrag ? 0 : _scrollRect.content.childCount - 1;
             Transform endItem = _scrollRect.content.GetChild(endItemIndex);
-            Vector2 newPos = endItem.position;
+            Vector2 newPos = endItem.localPosition;
 
             if (_positiveDrag)
             {
-                newPos.x = endItem.position.x - _scrollContent.ChildWidth * 1f - _scrollContent.ItemSpacing;
+                newPos.x = endItem.localPosition.x - _scrollContent.ChildWidth * 1f - _scrollContent.ItemSpacing;
             }
             else
             {
-                newPos.x = endItem.position.x + _scrollContent.ChildWidth * 1f + _scrollContent.ItemSpacing;
+                newPos.x = endItem.localPosition.x + _scrollContent.ChildWidth * 1f + _scrollContent.ItemSpacing;
             }
 
-            currItem.position = newPos;
+            currItem.localPosition = newPos;
             currItem.SetSiblingIndex(endItemIndex);
         }
         
