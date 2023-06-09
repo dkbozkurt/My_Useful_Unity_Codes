@@ -3,10 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using CpiTemplate.Game.Scripts;
 using UnityEngine;
 
-namespace DESIGN_PATTERNS.Object_Pool_Pattern
+namespace Game.Scripts.Managers
 {
     public enum ObjectName
     {
