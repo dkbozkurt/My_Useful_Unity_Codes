@@ -6,7 +6,7 @@ namespace CpiTemplate.Game.Playable.Scripts.Managers
 {
     public class JoystickManager : SingletonBehaviour<JoystickManager>,IDragHandler, IPointerDownHandler,IPointerUpHandler
     {
-         public RectTransform joystickBackground;
+        public RectTransform joystickBackground;
         public RectTransform joystickHandle;
     
         private Vector2 _input = Vector2.zero;
@@ -26,7 +26,8 @@ namespace CpiTemplate.Game.Playable.Scripts.Managers
         public void OnPointerDown(PointerEventData eventData)
         {
             joystickBackground.gameObject.SetActive(true);
-            OnDrag(eventData);
+            _input = Vector2.zero;
+            // OnDrag(eventData);
             _joyPosition = eventData.position;
             joystickBackground.position = eventData.position;
             joystickHandle.anchoredPosition = Vector2.zero;
