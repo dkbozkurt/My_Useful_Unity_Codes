@@ -300,7 +300,7 @@ namespace PlayableAdsKit.Scripts.Utilities
         {
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, _maxRayDistance) && Input.GetMouseButtonDown(0)) return hit.transform.gameObject;
+            if (Physics.Raycast(ray, out hit, _maxRayDistance)) return hit.transform.gameObject;
             return null;
         }
         
@@ -313,7 +313,7 @@ namespace PlayableAdsKit.Scripts.Utilities
         {
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, _maxRayDistance,layerMask) && Input.GetMouseButtonDown(0)) return hit.transform.gameObject;
+            if (Physics.Raycast(ray, out hit, _maxRayDistance,layerMask)) return hit.transform.gameObject;
             return null;
         }
 
@@ -662,7 +662,7 @@ namespace PlayableAdsKit.Scripts.Utilities
         /// <returns>UI location</returns>
         public static Vector3 GetScreenPositionOfObject(this Transform targetTransform)
         {
-            return targetTransform.GetScreenPositionOfObject();
+            return GetScreenPositionOfObject(targetTransform.position);
         }
 
         /// <summary>
